@@ -57,7 +57,6 @@
 
   const initLikeListener = () => {
     const likeButtonList = document.querySelectorAll(".like-button")
-    console.log(likeButtonList)
     for (const likeButtonElement of likeButtonList) {
       likeButtonElement.addEventListener("click", (event) => {
         event.stopPropagation();
@@ -142,24 +141,40 @@
     }
 
 
-    nameId.value = "";
-    commentAdd.value = "";
-
-    
-    fetch("https://wedev-api.sky.pro/api/v1/:andrey-stepanov/comments", {
+    fetch("https://wedev-api.sky.pro/api/todos/with-error", {
       method: "POST",
-      body: JSON.stringify(body)
+      body: JSON.stringify({...body, forceError: true})
     })
-      .then((response) => getAll())
+      .then((response) => {
+        if (response.status === 500) {
+          throw new Error("сервер сломался, попробуйте позже");
+        }
+        if (response.status === 400) {
+          throw new Error("Имя и комментарий должны быть не короче 3 символов");
+        }
+        if (response.ok) {
+          getAll();
+        }
+      })
       .then(() => {
         renderComments()
       })
       .then(() => {
         buttonElement.disabled = false;
-        buttonElement.textContent = "Добавить"; 
+        buttonElement.textContent = "Добавить";
+        commentAdd.value = ""; 
+        nameId.value = "";
       })
       .catch((error) => {
-        alert(error);
+        buttonElement.disabled = false;
+        buttonElement.textContent = "Добавить";
+        if (!navigator.onLine) { 
+          alert("интернет не работает");
+        }
+        else {
+          alert(error);
+          console.log(error);
+        }
       })
   });   
   
