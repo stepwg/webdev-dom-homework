@@ -14,6 +14,10 @@ body {
     min-height: 100vh;
   }
 
+  .loaderText {
+    display: block;
+  }
+
   .comments,
   .comment {
     margin: 0;

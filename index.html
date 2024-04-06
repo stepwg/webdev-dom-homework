@@ -9,6 +9,7 @@
 
 <body>
   <div class="container">
+    <h1 class="loaderText" id="loader">идет загрузка комментариев</h1>
     <ul class="comments" id="comments-id">
     </ul>
     <div class="add-form">
@@ -27,7 +28,14 @@
   const commentListEl = document.getElementById("comments-id");
   const nameId = document.getElementById("add-form-name-id");
   const commentAdd = document.getElementById("add-form-text-id");
+  const loaderFunc = document.getElementById("loader"); 
   const commentArr = [];
+
+
+  nameId.disabled = true;
+  commentAdd.disabled = true;
+  buttonElement.disabled = true;
+
 
   function getAll() {
     fetch("https://wedev-api.sky.pro/api/v1/:andrey-stepanov/comments")
@@ -38,6 +46,10 @@
       })
       .then(() => {
         renderComments();
+        loaderFunc.style.display = "none";
+        nameId.disabled = false;
+        commentAdd.disabled = false;
+        buttonElement.disabled = false;
       });
   }
 
@@ -129,6 +141,11 @@
         .replaceAll('"', "&quot;"),
     }
 
+
+    nameId.value = "";
+    commentAdd.value = "";
+
+    
     fetch("https://wedev-api.sky.pro/api/v1/:andrey-stepanov/comments", {
       method: "POST",
       body: JSON.stringify(body)
@@ -136,8 +153,6 @@
       .then((response) => getAll())
       .then(() => {
         renderComments()
-        nameId.value = "";
-        commentAdd.value = "";
       })
       .then(() => {
         buttonElement.disabled = false;
