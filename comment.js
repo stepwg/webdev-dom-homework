@@ -1,6 +1,8 @@
 import { postTodos, getTodos } from "./api.js";
+import { commentArr, user } from "./main.js";
 
-export function renderComments(commentArr, commentListEl) {
+export function renderComments() {
+    const app = document.querySelector(".comments")
     const commentHtml = commentArr
     .map((comment, index) => {
       const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -26,8 +28,11 @@ export function renderComments(commentArr, commentListEl) {
       })
       .join("");
   
-    commentListEl.innerHTML = commentHtml;
-    initLikeListener(commentArr, commentListEl);
+      
+    //commentListEl.innerHTML = commentHtml;//
+    
+    app.innerHTML = commentHtml;
+    initLikeListener(commentArr);
     const comment = document.querySelectorAll('.comment');
     const formElementText = document.getElementById('add-form-text-id');
   
@@ -38,7 +43,7 @@ export function renderComments(commentArr, commentListEl) {
     });
   };
 
-  const initLikeListener = (commentArr, commentListEl) => {
+  const initLikeListener = (commentArr) => {
     const likeButtonList = document.querySelectorAll(".like-button")
     for (const likeButtonElement of likeButtonList) {
       likeButtonElement.addEventListener("click", (event) => {
@@ -51,13 +56,17 @@ export function renderComments(commentArr, commentListEl) {
           commentArr[index].isLiked = true
           commentArr[index].likes += 1
         }
-        renderComments(commentArr, commentListEl);
+        renderComments(commentArr);
       })
     }
   };
 
-  export function addComment (nameId, commentAdd, commentArr, commentListEl, buttonElement, loaderFunc) {
-    console.log("here")
+  export function addComment () {
+    const buttonElement = document.getElementById("add-form-button-id");
+    const commentListEl = document.getElementById("comments-id");
+    const nameId = document.getElementById("add-form-name-id");
+    const commentAdd = document.getElementById("add-form-text-id");
+    const loaderFunc = document.getElementById("loader"); 
     nameId.classList.remove("error");
     commentAdd.classList.remove("error");
   
