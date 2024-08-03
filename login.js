@@ -9,13 +9,13 @@ export const renderLogin = ({container}) => {
       <div class="auth-form comment">
       <h1 class="formNaming">Форма входа</h1>
       <div class="inputs-box">
-        <input type="text" class="add-form-name" id="auth-form-name-id" placeholder="Введите логин" />
+        <input type="text" class="add-form-name" id="auth-form-name-id" placeholder="Введите логин"/>
         <input type="password" class="add-form-name" id="auth-form-password-id" placeholder="Введите пароль" />
       </div>
         <div class="add-form-row">
           <button type="button" class="add-form-button" id="auth-button-id">Войти</button>
         </div>
-        <a href="registrarion.html">Зарегистрироваться</a>
+
       </div>
       </div>`
   const addForm = document.getElementById('add-form');

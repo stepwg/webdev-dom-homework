@@ -121,7 +121,7 @@ body {
 }
 
 .add-form-name {
-  width: 300px;
+  width: 80%;
   padding: 11px 22px;
 }
 
@@ -129,6 +129,7 @@ body {
   margin-top: 12px;
   padding: 22px;
   resize: none;
+  width: 80%;
 }
 
 .add-form-row {

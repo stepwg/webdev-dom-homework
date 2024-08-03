@@ -70,7 +70,7 @@ export function renderComments() {
     nameId.classList.remove("error");
     commentAdd.classList.remove("error");
   
-    if (nameId.value === "" || commentAdd.value === "" || !commentAdd.value.trim() || !nameId.value.trim()) {
+    if (user.name === "" || commentAdd.value === "" || !commentAdd.value.trim() || !user.name.trim()) {
       nameId.classList.add("error")
       commentAdd.classList.add("error")
       return;
@@ -94,7 +94,7 @@ export function renderComments() {
     }
   
   
-    postTodos(body)
+    postTodos(body, user.token)
       .then((response) => {
         if (response.status === 500) {
           throw new Error("сервер сломался, попробуйте позже");

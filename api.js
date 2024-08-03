@@ -1,11 +1,14 @@
 export function getTodos() {
-    return fetch("https://wedev-api.sky.pro/api/v1/:andrey-stepanov/comments")
+    return fetch("https://wedev-api.sky.pro/api/v2/:andrey-stepanov/comments")
     .then((response) => response.json())
 }
 
-export function postTodos(body) {
-    return fetch("https://wedev-api.sky.pro/api/v1/:andrey-stepanov/comments", {
-    method: "POST",
+export function postTodos(body, token) {
+    return fetch("https://wedev-api.sky.pro/api/v2/:andrey-stepanov/comments", {
+    method: "POST", 
+    headers: {
+      "Authorization": `Bearer ${token}`
+    },
     body: JSON.stringify({...body, forceError: true})
   })
 }
