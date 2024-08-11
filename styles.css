@@ -73,6 +73,7 @@ body {
 .comment-body {
   margin-top: 32px;
   margin-bottom: 32px;
+  word-wrap: break-word;
 }
 
 .comment-text {

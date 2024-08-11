@@ -2,8 +2,6 @@ import { authorizationApi } from './api.js'
 import { setUser } from './main.js';
 import { renderMain } from './renderMain.js';
 
-
-
 export const renderLogin = ({container}) => {
   container.innerHTML = `<div class="container">
       <div class="auth-form comment">
@@ -18,7 +16,6 @@ export const renderLogin = ({container}) => {
 
       </div>
       </div>`
-  const addForm = document.getElementById('add-form');
   const authButton = document.getElementById('auth-button-id');
   const username = document.getElementById("auth-form-name-id");
   const password = document.getElementById("auth-form-password-id");
@@ -30,6 +27,5 @@ export const renderLogin = ({container}) => {
       setUser(response.user)
       renderMain({container})
     })
-
   });
 }
