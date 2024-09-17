@@ -1,6 +1,5 @@
-import { fetchAndRenderComents } from "./main.js"
+import { fetchAndRenderComents, addListenerForComment } from "./main.js"
 import { renderForm } from "./renderForm.js"
-import { addListenerForComment } from "./main.js"
 
 export const renderMain = ({container}) => {
     container.innerHTML = `<div class="container">

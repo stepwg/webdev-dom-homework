@@ -1,5 +1,4 @@
 import { postTodos, getTodos } from "./api.js";
-import { initAddCommentListener } from "./listeners.js";
 import { commentArr, user } from "./main.js";
 import { addListenerForComment } from "./main.js";
 import { format } from "date-fns"
@@ -8,26 +7,25 @@ export function renderComments() {
   const app = document.querySelector(".comments")
   const commentHtml = commentArr
   .map((comment, index) => {
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-      let date = new Date(comment.date).toLocaleString('ru-RU', options)
+    const date = format(comment.date, 'yyyy-MM-dd hh.mm.ss');
 
-      return `<li class="comment">
-        <div class="comment-header">
-          <div>${comment.author.name}</div>
-          <div>${date}</div>
+    return `<li class="comment">
+      <div class="comment-header">
+        <div>${comment.author.name}</div>
+        <div>${date}</div>
+      </div>
+      <div class="comment-body">
+        <div class="comment-text">
+          ${comment.text}
         </div>
-        <div class="comment-body">
-          <div class="comment-text">
-            ${comment.text}
-          </div>
+      </div>
+      <div class="comment-footer">
+        <div class="likes">
+          <span class="likes-counter">${comment.likes}</span>
+          <button class="like-button ${comment.isLiked ? "-active-like" : ""}" data-like="${index}"></button>
         </div>
-        <div class="comment-footer">
-          <div class="likes">
-            <span class="likes-counter">${comment.likes}</span>
-            <button class="like-button ${comment.isLiked ? "-active-like" : ""}" data-like="${index}"></button>
-          </div>
-        </div>
-      </li>`
+      </div>
+    </li>`
     })
     .join("");
   
