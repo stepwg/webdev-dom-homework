@@ -2,6 +2,7 @@ import { postTodos, getTodos } from "./api.js";
 import { initAddCommentListener } from "./listeners.js";
 import { commentArr, user } from "./main.js";
 import { addListenerForComment } from "./main.js";
+import { format } from "date-fns"
 
 export function renderComments() {
   const app = document.querySelector(".comments")
